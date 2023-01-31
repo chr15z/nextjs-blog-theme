@@ -15,20 +15,39 @@ date: January 31 2023
 ## Code implemented in python
 
 ```
-def solve_sudoku(arr, recursive_calls):
-    recursive_calls += 1
-    for row_i in range(len(arr)):
-        for col_i in range(len(arr)):
+def solve_sudoku(arr):
+    for row_i in range(9):
+        for col_i in range(9):
             if arr[row_i][col_i] == 0:
                 for num in range(1, 10):
                     if is_num_possible(row_i, col_i, num, arr):
                         arr[row_i][col_i] = num
-                        solve_sudoku(arr, recursive_calls)
+                        solve_sudoku(arr)
                         arr[row_i][col_i] = 0
                 return
-    print("Solved Sudoku:")
     print_sudoku(arr)
-    print("It took " + str(recursive_calls) + " calls")
 ```
 
 
+```
+def is_num_possible(row, col, num, arr):
+    for row_i in range(9):
+        if arr[row_i][col] is num:
+            return False
+    for col_i in range(9):
+        if arr[row][col_i] is num:
+            return False
+    upper_left_row = (row // 3) * 3
+    upper_left_col = (col // 3) * 3
+    for row_i in range(3):
+        for col_i in range(3):
+            if arr[upper_left_row + row_i][upper_left_col + col_i] == num:
+                return False
+    return True
+```
+
+---
+
+## Outlook
+
+Due to my health informatics studys i wanted to get used to OpenCV and this project seems like a good fit. As an input i want an image of a sudoku. A method should transform this picture to an 2d array which can be solved with the descriped algorithm. Right now the only way to implement this method is with the help of ML and this is completely new to me. It will take some time to get used to the concept and find a model that fits or create an own.   
