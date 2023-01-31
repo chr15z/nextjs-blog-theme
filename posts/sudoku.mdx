@@ -23,8 +23,8 @@ An efficiant algorithm should be oriented towards that, but in a more strict way
 I'd like to start with the main method, before we get to the help method. The goal is to get through a 9 row x 9 col array (= input) and fill in the missing numbers in a correct way. 
 To check every spot in the array we need to implement two for loops and in every position arr[row_i][col_i] we check if the value is unoccupied (= 0). 
 If there is one a third for loop starts with the goal to fill in the right value (= num) for every unoccupied value (= arr[row_i][col_i]). 
-First we check if the potential right value can be placed in the unoccupied field (is_num_possible(row_i, col_i, num, arr)). If that is so the unoccupied spot is now occupied (with num) and the recursion starts. 
-Its most likely that the first num that was filled in isn't the right one. So there will always be an unoccupied spot that has to be filled. Only if every spot has been taken, the algorithm will skip the third for loop and terminates correctly.
+First we check if the potential right value can be placed in the unoccupied field (is_num_possible(row_i, col_i, num, arr)). If that is so, the unoccupied spot is now occupied (with num) and the recursion starts. 
+Its most likely that the first num that was filled in isn't the right one. So in the recursion the programm finds no number 1-9 that can be placed in the free spot. Now the recursion returns and the current position will be unocuppied for now. The algortihm returns to the latest number it filled in and tries another number for the spot. More general you could say it checks every possibility in an ordered sequence. Only if every spot has been taken, the algorithm will skip the third for loop and returns the first solution (or print the sudoku).
 
 ```js
 def solve_sudoku(arr):
