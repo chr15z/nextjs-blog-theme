@@ -2,10 +2,26 @@ import { Box } from 'rebass'
 
 <Box display="flex">
   <Box width={1/2} p={3}>
-    Block 1
+    
+    I'd like to start with the main method, before we get to the help method. The goal is to get through a 9 row x 9 col array (= input) and fill in the missing numbers in a correct way. To check every spot in the array we need to implement two for loops and in every position arr[row_i][col_i] we check if the value is unoccupied (= 0). If there is one a third for loop starts with the goal to fill in the right value (= num) for every unoccupied value (= arr[row_i][col_i]). First we check if the potential right value can be placed in the unoccupied field (is_num_possible(row_i, col_i, num, arr)). If that is so, the unoccupied spot is now occupied (with num) and the recursion starts. Its most likely that the first num that was filled in isn't the right one. So in the recursion the programm finds no number 1-9 that can be placed in the free spot. Now the recursion returns and the current position will be unocuppied for now. The algortihm returns to the latest number it filled in and tries another number for the spot. More general you could say it checks every possibility in an ordered sequence. Only if every spot has been taken, the algorithm will skip the third for loop and returns the first solution (or print the sudoku).
+    
   </Box>
   <Box width={1/2} p={3}>
-    Block 2
+    
+    
+      ```python
+      def solve_sudoku(arr):
+          for row_i in range(9):
+              for col_i in range(9):
+                  if arr[row_i][col_i] == 0:
+                      for num in range(1, 10):
+                          if is_num_possible(row_i, col_i, num, arr):
+                              arr[row_i][col_i] = num
+                              solve_sudoku(arr)
+                              arr[row_i][col_i] = 0
+                      return
+          print_sudoku(arr)
+      ```
   </Box>
 </Box>
 
@@ -34,25 +50,7 @@ An efficiant algorithm should be oriented towards that, but in a more strict way
 
 ## The code implemented in python
 
-I'd like to start with the main method, before we get to the help method. The goal is to get through a 9 row x 9 col array (= input) and fill in the missing numbers in a correct way. 
-To check every spot in the array we need to implement two for loops and in every position arr[row_i][col_i] we check if the value is unoccupied (= 0). 
-If there is one a third for loop starts with the goal to fill in the right value (= num) for every unoccupied value (= arr[row_i][col_i]). 
-First we check if the potential right value can be placed in the unoccupied field (is_num_possible(row_i, col_i, num, arr)). If that is so, the unoccupied spot is now occupied (with num) and the recursion starts. 
-Its most likely that the first num that was filled in isn't the right one. So in the recursion the programm finds no number 1-9 that can be placed in the free spot. Now the recursion returns and the current position will be unocuppied for now. The algortihm returns to the latest number it filled in and tries another number for the spot. More general you could say it checks every possibility in an ordered sequence. Only if every spot has been taken, the algorithm will skip the third for loop and returns the first solution (or print the sudoku).
 
-```python
-def solve_sudoku(arr):
-    for row_i in range(9):
-        for col_i in range(9):
-            if arr[row_i][col_i] == 0:
-                for num in range(1, 10):
-                    if is_num_possible(row_i, col_i, num, arr):
-                        arr[row_i][col_i] = num
-                        solve_sudoku(arr)
-                        arr[row_i][col_i] = 0
-                return
-    print_sudoku(arr)
-```
 
 
 This is the part, where a paper and a pencil helps for sure. As an input we get the current position (row, col) we would like to fill an certain number (= num) in.
